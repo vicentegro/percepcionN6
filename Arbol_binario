@@ -47,29 +47,58 @@ void ordena(){
 }
 
 
-
+//METODO DENTRO DE LA CLASE ARBOL
 void ordena(){
   int selected=0;
   int i=0;
   int pointed=0;
   boolean end=false;
-    while(end == false){ //revisa desde el nodo 0 si hay algun nodo a la izquierda
+  boolean result_side=false;
+    while(end == false){ //PRIMER WHILE, REVISA TODA LA RAMA IZQUIERDA DEL NODO RAIZ
     String side="left";
-    boolean result_side=checkEmpty(myNodes[selected],side);
-    if(result_side == false){ //si no está vacio, entonces seleccionamos el nodo que está a la izquierda
-      selected=int(float(myNodes[int(float(pointed))].left));
+    boolean result_side=checkEmpty(myNodes[pointed],side);
+    if(result_side == false){ //si no está vacio, entonces apuntamos al nodo que está a la izquierda
+      pointed=int(float(myNodes[int(float(selected))].left));
     } else {
+      selected=pointed;
       finalx[i] = int(float(myNodes[selected].value)); //si està vacio entonces guarda el valor y apunta a la derecha
       i++;
       side="right";
       result_side=checkEmpty(myNodes[selected],side);
       if(result_side == false){ //si tampoco hay nodo a la derecha entonces se selecciona al padre del nodo actual
-        selected=int(float(myNodes[int(float(pointed))].right));
+        pointed=int(float(myNodes[int(float(selected))].right));
         } else{
-          myNodes[]
-        }
+           finalx[i] = int(float(myNodes[0].value)); //nos regresamos al nodo raiz y terminamos while
+           i++;
+           pointed=0;
+           end = true;
+         }
       }
-      
-      
+    end=false;   
+    while(end == false){ //SEGUNDO WHILE, REVISA TODA LA RAMA DERECHA DEL NODO RAIZ
+    String side="right";
+    boolean result_side=checkEmpty(myNodes[pointed],side);
+    if(result_side == false){ //si no está vacio, entonces apuntamos al nodo que está a la derecha
+      pointed=int(float(myNodes[int(float(selected))].right));
+      side="left";
+      result_side=checkEmpty(myNodes[selected],side);
+      if(result_side == false){ //si hay nodo a la izquierda del actual entonces se apunta a este
+         pointed=int(float(myNodes[int(float(selected))].right));
+         } else{
+            selected=pointed;
+            finalx[i] = int(float(myNodes[selected].value)); //si está vacio entonces selecciona nodo, guarda el valor y apunta a la derecha
+            i++;
+            side="right"
+            result_side=checkEmpty(myNodes[selected],side);
+            if(result_side == false){
+               pointed=int(float(myNodes[int(float(selected))].right));
+            }
+          }
+             
+    } else { //si no hay nada a la derecha entonces el algoritmo ha terminado
+      end=true; 
+        }
    }
+      
+}
 }
