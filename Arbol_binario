@@ -1,0 +1,75 @@
+int [] x = {13,3,4,19,10,17};
+Node root; //Declarando nodo
+Tree arbolito;
+
+void setup(){
+  root = new Node(x[0]); //Inicializar nodo
+  arbolito = new Tree(root);
+  //println(arbolito.checkSide(x[1],x[0]));
+  for(int i = 1; i < x.length; i++){
+    arbolito.createNode(arbolito.myNodes[0], x[i]);
+  }
+  
+  for(int i = 0; i < x.length; i++){
+    arbolito.printData(i);
+    println("-----------");
+  }
+  
+  for(int i=0; i < x.length; i++){
+    println(finalx[i]);
+  }
+}
+
+void draw(){
+}
+
+
+void ordena(){
+  int i=0;
+  int j=0;
+  String aux=arbolito.myNodes[i].left;
+  while(aux != null){ //revisa desde el nodo 0 si hay algun nodo a la izquierda
+    aux=arbolito.myNodes[i].left;
+    if(aux != null){
+      i=int(float(arbolito.myNodes[int(float(aux))].left));
+    } else { 
+      finalx[j] = int(float(arbolito.myNodes[i].value));
+      j++;
+      i=int(float(arbolito.myNodes[int(float(aux))].right));
+      aux=arbolito.myNodes[i].left;
+      if(aux != null){
+         
+        }
+      }
+      
+      
+   }
+}
+
+
+
+void ordena(){
+  int selected=0;
+  int i=0;
+  int pointed=0;
+  boolean end=false;
+    while(end == false){ //revisa desde el nodo 0 si hay algun nodo a la izquierda
+    String side="left";
+    boolean result_side=checkEmpty(myNodes[selected],side);
+    if(result_side == false){ //si no está vacio, entonces seleccionamos el nodo que está a la izquierda
+      selected=int(float(myNodes[int(float(pointed))].left));
+    } else {
+      finalx[i] = int(float(myNodes[selected].value)); //si està vacio entonces guarda el valor y apunta a la derecha
+      i++;
+      side="right";
+      result_side=checkEmpty(myNodes[selected],side);
+      if(result_side == false){ //si tampoco hay nodo a la derecha entonces se selecciona al padre del nodo actual
+        selected=int(float(myNodes[int(float(pointed))].right));
+        } else{
+          myNodes[]
+        }
+      }
+      
+      
+   }
+}
