@@ -1,0 +1,143 @@
+class Tree {
+  //Atributos
+  Node [] myNodes; //Declarando Array de nodos
+
+  //Constructor
+  Tree(Node n) {
+    myNodes = new Node[1];
+    myNodes[0] = n;
+  }
+
+  //Métodos
+  String checkSide(Node n, int val) {
+    String res;
+    if (val <= int(n.value)) {
+      res = "left";
+    } else {
+      res = "right";
+    }
+    return res;
+  }
+
+  boolean checkEmpty(Node n, String side) {
+    boolean empty = false;
+    if (side == "left") {
+      if (n.left == null) {
+        empty = true;
+      }
+    }
+    if (side == "right") {
+      if (n.right == null) {
+        empty = true;
+      }
+    }
+    return empty;
+  }
+
+  void addLeftChild(Node n) {
+    n.left = str(myNodes.length);
+  }
+
+  void addRightChild(Node n) {
+    n.right = str(myNodes.length);
+  }
+
+  void createNode(Node n, int val) {
+    String lado;
+    lado = checkSide(n, val);
+    if (lado == "left") {
+      boolean vacio;
+      vacio = checkEmpty(n, lado);
+      if (vacio == true) {
+        addLeftChild(n);
+        Node nuevo;
+        nuevo = new Node(myNodes.length, int(n.id), val);
+        myNodes = (Node []) append(myNodes, nuevo);
+      } else {
+        createNode(myNodes[int(n.left)], val);
+      }
+    }
+
+
+
+    if (lado == "right") {
+      boolean vacio;
+      vacio = checkEmpty(n, lado);
+      if (vacio == true) {
+        addRightChild(n);
+        Node nuevo;
+        nuevo = new Node(myNodes.length, int(n.id), val);
+        myNodes = (Node []) append(myNodes, nuevo);
+      } else {
+        createNode(myNodes[int(n.right)], val);
+      }
+    }
+  }
+
+
+
+
+  void printData(int i) {
+    println(arbolito.myNodes[i].id);
+    println(arbolito.myNodes[i].parent);
+    println(arbolito.myNodes[i].value);
+    println(arbolito.myNodes[i].left);
+    println(arbolito.myNodes[i].right);
+    println(arbolito.myNodes[i].order);
+    println(arbolito.myNodes[i].orderLeft);
+    println(arbolito.myNodes[i].orderRight);
+  }
+
+
+
+  void acomodar(Node n) {
+
+    if (n.left != null) {              //revisar si hay nodo Hijo a la Izquierda
+      if (n.orderLeft == true) {                 //revisar si ya se checó el nodo de la izquierda
+        if (n.order == false) {                   //revisar si el valor del nodo ya fue ordenado en el array final
+          Ordenar(n);
+        }
+      } else {
+        irIzq(n); //si no fue ordenado, entonces se apunta al nodo de la izquierda
+      }
+    } else {
+      n.orderLeft=true; //si no hay nodo a la izquierda, se considera que ya se revisó
+    }
+
+    if (n.order==false) {     //revisar si ya se ordenó el valor del nodo, si no, se ordena
+      Ordenar(n);
+    }
+    if (n.right == null) {    //Ahora se revisa si hay un nodo Hijo a la derecha
+      n.orderRight=true;      //si no hay, se toma como revisado y se va al nodo de arriba
+      irArriba(n);
+    } 
+    if (n.orderRight==false) {        //revisar si ya se ordenó el nodo de la derecha en caso de que haya uno
+      irDch(n);                       //si no, se apunta a ese nodo
+    }
+    if (n.parent!=null) {            //revisa si el nodo tiene un nodo padre, de ser asi, va hacia arriba
+      irArriba(n);
+    } 
+    
+  }   
+
+  void irIzq(Node n) {
+    n.orderLeft=true;
+    acomodar(myNodes[int(n.left)]);
+  }
+
+  void irDch(Node n) {
+    n.orderRight=true;
+    acomodar(myNodes[int(n.right)]); //se apunta al nodo y regresa a la funcion para su ordenamiento
+  }
+
+  void Ordenar(Node n) {
+    newX[posnewX]=int (n.value);
+    n.order= true;
+    posnewX++;
+  }
+
+  void irArriba(Node n) {
+
+    acomodar(myNodes[int(n.parent)]);
+  }
+}
